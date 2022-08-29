@@ -1,6 +1,8 @@
+/* Importing the components from the components folder. */
 import Formulario from "./components/Formulario"
 import Header from "./components/Header"
 import ListadoPacientes  from "./components/ListadoPacientes"
+
 
 
 function App() {
