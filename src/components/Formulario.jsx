@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 
-const Formulario = () => {
+const Formulario = ({ setPacientes }) => {
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
   const [email, setEmail] = useState('');
@@ -22,6 +22,7 @@ const Formulario = () => {
   }
   //lo devolvemos a false para que cuando corrigamos los campos ya no aparezca el mensaje
   setError(false)
+  setPacientes(nombre)
 }
 
 
@@ -45,7 +46,7 @@ const Formulario = () => {
 
         <div className='mb-5'>
             <label htmlFor="mascota" className='block text-gray-700 uppercase font-bold'>
-              Nombre de la mascota {nombre}
+              Nombre de la mascota
             </label>
             <input
               id="mascota"
