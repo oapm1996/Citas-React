@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 
 
-const Formulario = ({ setPacientes }) => {
+const Formulario = (/* Destructuring the props object. */
+{ pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
   const [email, setEmail] = useState('');
@@ -11,10 +12,11 @@ const Formulario = ({ setPacientes }) => {
   const [error, setError] = useState(false);
 
   //Asi se puede asociar una funcion a un evento
+  /* Preventing the default behavior of the form. */
   const handleSubmit = (e)=> {
     e.preventDefault();
 
-  //Validacion de formulario
+  /* Checking if any of the inputs are empty. */
   if([nombre,propietario,email,fecha,sintomas].includes('')){
     console.log('Hay almenos un campo vacio')
     setError(true)
@@ -23,6 +25,25 @@ const Formulario = ({ setPacientes }) => {
   //lo devolvemos a false para que cuando corrigamos los campos ya no aparezca el mensaje
   setError(false)
   setPacientes(nombre)
+
+ /* Creating an object with the values of the form. */
+  const objetoPacientes = {
+    nombre,
+    propietario,
+    email,
+    fecha,
+    sintomas
+  }
+
+  /* Adding the new object to the array of objects. */
+  setPacientes([...pacientes, objetoPacientes])
+
+  /* Clearing the form after the user submits it. */
+  setNombre('')
+  setPropietario('')
+  setEmail('')
+  setFecha('')
+  setSintomas('')
 }
 
 
@@ -36,7 +57,7 @@ const Formulario = ({ setPacientes }) => {
       </p>
 
       <form 
-      //asociando el evento onSubmit a la funcion {handleSubmit}
+      /* Associating the event `onSubmit` to the function `handleSubmit`. */
       onSubmit={handleSubmit}
       className='bg-white shadow-md rounded-lg py-10 px-5 mb-10'>
         {error && 
@@ -54,6 +75,7 @@ const Formulario = ({ setPacientes }) => {
               placeholder="Nombre de la mascota"
               className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
               value={nombre}
+              /* A function that is being called when the input changes. */
               onChange={(e)=> setNombre(e.target.value)}
             />
         </div>
